@@ -13,6 +13,8 @@ public class MazeManager {
 	public int locationX;
 	public int locationY;
 	
+	public int count = 0;
+	
 	public MazeManager() {
 		map = new Room[3][3];
 		player  = new Player(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
@@ -38,6 +40,10 @@ public class MazeManager {
 				//Check SOUTH door
 				if (map[i][j].hasDoor(Room.SOUTH)) {
 					map[i][j].getDoor(Room.SOUTH).setUnlocked(j > 0 && map[i][j-1].hasDoor(Room.NORTH));
+					//FIXME this should be removed
+					if (locationX == 1 && locationY == 0) {
+						location.getDoor(Room.SOUTH).setUnlocked(true);
+					}
 				}
 				//Check WEST door
 				if (map[i][j].hasDoor(Room.WEST)) {

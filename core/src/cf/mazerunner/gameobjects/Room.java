@@ -14,6 +14,8 @@ public class Room extends GameObject {
 	private Door[] doors;
 	private Wall[] walls;
 	
+	public static int sid = 0;
+	public int id;
 	
 	public Room(Color c) {
 		super(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -25,6 +27,9 @@ public class Room extends GameObject {
 		walls[EAST] = new Wall(EAST);
 		walls[SOUTH] = new Wall(SOUTH);
 		walls[WEST] = new Wall(WEST);
+		
+		id = sid;
+		sid++;
 	}
 	
 	public void addDoors(int direction) {
