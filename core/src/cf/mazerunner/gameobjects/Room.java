@@ -1,7 +1,8 @@
 package cf.mazerunner.gameobjects;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Room extends GameObject {
 	public static final int NORTH = 0;
@@ -9,26 +10,25 @@ public class Room extends GameObject {
 	public static final int SOUTH = 2;
 	public static final int WEST = 3;
 	
+	private Color roomColor;
 	private Door[] doors;
 	private Wall[] walls;
 	
-	public Room(TextureRegion img) {
-		super(img, 0, 0);
+	
+	public Room(Color c) {
+		super(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		roomColor = c;
 		doors = new Door[4];
-		walls = new Wall[4];
 		
-		walls[NORTH] = new Wall();
-		walls[NORTH].setDirection(NORTH);
-		walls[EAST] = new Wall();
-		walls[EAST].setDirection(EAST);
-		walls[SOUTH] = new Wall();
-		walls[SOUTH].setDirection(SOUTH);
-		walls[WEST] = new Wall();
-		walls[WEST].setDirection(WEST);
+		walls = new Wall[4];
+		walls[NORTH] = new Wall(NORTH);
+		walls[EAST] = new Wall(EAST);
+		walls[SOUTH] = new Wall(SOUTH);
+		walls[WEST] = new Wall(WEST);
 	}
 	
 	public void addDoors(int direction) {
-		doors[direction] = new Door();
+		doors[direction] = new Door(direction);
 	}
 	
 	public boolean hasDoor(int direction) {
@@ -41,21 +41,33 @@ public class Room extends GameObject {
 
 	@Override
 	public void update(float delta) {
-		// TODO Auto-generated method stub
+		super.update(delta);
 		
+		for (int i = 0; i < walls.length; i++) {
+			walls[i].update(delta);
+		}
+		
+		for (int i = 0; i < doors.length; i++) {
+			if (hasDoor(i)) {
+				doors[i].update(delta);
+			}
+		}
 	}
 
 	@Override
-	public void draw(SpriteBatch batch) {
-		sprite.draw(batch);
+	public void draw(ShapeRenderer renderer) {
+		renderer.setColor(roomColor);
+		renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
 		
-		for (Wall w : walls) {
-			w.sprite.draw(batch);
+		for (int i = 0; i < walls.length; i++) {
+			walls[i].draw(renderer);
 		}
 		
-		//for (Door d : doors) {
-		//	d.sprite.draw(batch);
-		//}
+		for (int i = 0; i < doors.length; i++) {
+			if (hasDoor(i)) {
+				doors[i].draw(renderer);
+			}
+		}
 	}
 }
  

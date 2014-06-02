@@ -14,37 +14,27 @@ public class InputManager implements InputProcessor {
 	public static final char ESC = '\u001B';
 	
 	//Mouse vectors
-	private Vector2 mouse;
-	private Vector2 mouseDelta;
+	private static Vector2 mouse = new Vector2();
+	private static Vector2 mouseDelta = new Vector2();
 	
 	//Array of keyboard inputs, available for rest of program to query
-	public boolean[] keysTyped;
-	public boolean[] keys;
+	public static boolean[] keysTyped = new boolean[128];
+	public static boolean[] keys = new boolean[256];
 	
 	//Arrays relating to mouse/touch inputs
-	public boolean[] buttonsDown;
-	public boolean[] buttonsClicked;
-	public int mouseScrollDirection;
+	public static boolean[] buttonsDown = new boolean[8];
+	public static boolean[] buttonsClicked = new boolean[8];
+	public static int mouseScrollDirection = 0;
 	
-	public InputManager() {
-		mouse = new Vector2();
-		mouseDelta = new Vector2();	
-		keysTyped = new boolean[128];
-		keys = new boolean[256];
-		buttonsDown = new boolean[8];
-		buttonsClicked = new boolean[8];
-		mouseScrollDirection = 0;
-	}
-	
-	public Vector2 getMouse() {
+	public static Vector2 getMouse() {
 		return new Vector2(mouse);
 	}
 	
-	public Vector2 getMouseDelta() {
+	public static Vector2 getMouseDelta() {
 		return new Vector2(mouseDelta);
 	}
 	
-	public void clear() {
+	public static void clear() {
 		//The mouseDelta vectors need to be reset on clear, since this is the only way to "auto-clear" them
 		//in the event that no input is received
 		mouseDelta.set(0, 0);

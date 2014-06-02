@@ -6,7 +6,8 @@ import cf.mazerunner.Mazerunner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameScreen extends AbstractScreen {
 	private MazeManager maze;	
@@ -18,23 +19,19 @@ public class GameScreen extends AbstractScreen {
 
 	@Override
 	public void update(float delta) {
+		maze.location.update(delta);
 		maze.player.update(delta);
 		
-		if (game.input.keysTyped[InputManager.ESC]) Gdx.app.exit();
-		
-		if (game.input.keys[Keys.UP] || game.input.keys[Keys.W]) maze.player.position.y += maze.player.getSpeed()*delta;
-		if (game.input.keys[Keys.LEFT] || game.input.keys[Keys.A]) maze.player.position.x -= maze.player.getSpeed()*delta;
-		if (game.input.keys[Keys.DOWN] || game.input.keys[Keys.S]) maze.player.position.y -= maze.player.getSpeed()*delta;
-		if (game.input.keys[Keys.RIGHT] || game.input.keys[Keys.D]) maze.player.position.x += maze.player.getSpeed()*delta;
+		if (InputManager.keysTyped[InputManager.ESC]) Gdx.app.exit();
 	}
 
 	@Override
-	public void draw() {
+	public void draw(ShapeRenderer renderer) {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		game.batch.begin();
-		//maze.location.draw(game.batch);
-		maze.player.draw(game.batch);
-		game.batch.end();		
+		renderer.begin(ShapeType.Filled);
+		maze.location.draw(renderer);
+		maze.player.draw(renderer);
+		renderer.end();		
 	}
 }
