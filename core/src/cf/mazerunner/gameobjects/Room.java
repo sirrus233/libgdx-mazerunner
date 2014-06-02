@@ -38,7 +38,11 @@ public class Room extends GameObject {
 	public Door getDoor(int direction) {
 		return doors[direction];
 	}
-
+	
+	public Wall getWall(int direction) {
+		return walls[direction];
+	}
+	
 	@Override
 	public void update(float delta) {
 		super.update(delta);

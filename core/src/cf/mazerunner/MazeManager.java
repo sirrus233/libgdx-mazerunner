@@ -10,6 +10,8 @@ public class MazeManager {
 	public Room[][] map;
 	public Player player;
 	public Room location;
+	public int locationX;
+	public int locationY;
 	
 	public MazeManager() {
 		map = new Room[3][3];
@@ -17,7 +19,9 @@ public class MazeManager {
 		
 		buildMaze();
 		
-		location = map[1][1];
+		locationX = 1;
+		locationY = 1;
+		location = map[locationX][locationY];
 	}
 	
 	private void buildMaze() {
