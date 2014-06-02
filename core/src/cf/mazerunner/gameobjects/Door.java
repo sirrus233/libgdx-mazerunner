@@ -15,20 +15,18 @@ public class Door extends GameObject {
 		
 		switch (direction) {
 		case Room.NORTH:
-			position.x = (Gdx.graphics.getWidth() - bounds.width) / 2;
-			position.y = (Gdx.graphics.getHeight() - bounds.height);
+			setPosition((Gdx.graphics.getWidth() - getBounds().width) / 2, Gdx.graphics.getHeight() - getBounds().height);
 			break;
 		case Room.EAST:
 			rotate();
-			position.x = Gdx.graphics.getWidth() - bounds.width;
-			position.y = (Gdx.graphics.getHeight() - bounds.height) / 2;
+			setPosition(Gdx.graphics.getWidth() - getBounds().width, (Gdx.graphics.getHeight() - getBounds().height) / 2);
 			break;
 		case Room.SOUTH:
-			position.x = (Gdx.graphics.getWidth() - bounds.width) / 2;
+			setPosition((Gdx.graphics.getWidth() - getBounds().width) / 2, 0);
 			break;
 		case Room.WEST:
 			rotate();
-			position.y = (Gdx.graphics.getHeight() - bounds.height) / 2;
+			setPosition(0, (Gdx.graphics.getHeight() - getBounds().height) / 2);
 			break;
 		default:
 			System.out.println("-E- Bad door placement.");
@@ -57,6 +55,12 @@ public class Door extends GameObject {
 		} else {
 			renderer.setColor(Color.WHITE);
 		}
-		renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+		renderer.rect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
+	}
+
+	@Override
+	public void update(float delta) {
+		// TODO Auto-generated method stub
+		
 	}
 }

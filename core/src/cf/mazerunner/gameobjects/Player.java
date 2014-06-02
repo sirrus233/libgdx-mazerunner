@@ -16,19 +16,17 @@ public class Player extends GameObject {
 	}
 
 	@Override
-	public void update(float delta) {
-		super.update(delta);
-		
+	public void update(float delta) {	
 		// Handle movement input
-		if (InputManager.keys[Keys.UP] || InputManager.keys[Keys.W]) position.y += SPEED*delta;
-		if (InputManager.keys[Keys.LEFT] || InputManager.keys[Keys.A]) position.x -= SPEED*delta;
-		if (InputManager.keys[Keys.DOWN] || InputManager.keys[Keys.S]) position.y -= SPEED*delta;
-		if (InputManager.keys[Keys.RIGHT] || InputManager.keys[Keys.D]) position.x += SPEED*delta;
+		if (InputManager.keys[Keys.UP] || InputManager.keys[Keys.W]) updatePosition(0, SPEED*delta);
+		if (InputManager.keys[Keys.LEFT] || InputManager.keys[Keys.A]) updatePosition(-SPEED*delta, 0);
+		if (InputManager.keys[Keys.DOWN] || InputManager.keys[Keys.S]) updatePosition(0, -SPEED*delta);
+		if (InputManager.keys[Keys.RIGHT] || InputManager.keys[Keys.D]) updatePosition(SPEED*delta, 0);
 	}
 
 	@Override
 	public void draw(ShapeRenderer renderer) {
 		renderer.setColor(Color.BLACK);
-		renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+		renderer.rect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
 	}
 }

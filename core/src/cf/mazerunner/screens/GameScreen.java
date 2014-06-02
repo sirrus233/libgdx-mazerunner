@@ -25,46 +25,46 @@ public class GameScreen extends AbstractScreen {
 		
 		//Door collisions
 		if (maze.location.hasDoor(Room.NORTH) && !maze.location.getDoor(Room.NORTH).isLocked()) {
-			if (maze.player.bounds.overlaps(maze.location.getDoor(Room.NORTH).bounds)) {
+			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.NORTH).getBounds())) {
 				maze.locationY++;
 				maze.location = maze.map[maze.locationX][maze.locationY];
-				maze.player.position.y = maze.location.getWall(Room.SOUTH).bounds.height;
+				maze.player.setPosition(maze.player.getPosition().x, maze.location.getWall(Room.SOUTH).getBounds().height);
 			}
 		}
 		if (maze.location.hasDoor(Room.EAST) && !maze.location.getDoor(Room.EAST).isLocked()) {
-			if (maze.player.bounds.overlaps(maze.location.getDoor(Room.EAST).bounds)) {
+			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.EAST).getBounds())) {
 				maze.locationX++;
 				maze.location = maze.map[maze.locationX][maze.locationY];
-				maze.player.position.x = maze.location.getWall(Room.WEST).bounds.width;
+				maze.player.setPosition(maze.location.getWall(Room.WEST).getBounds().width, maze.player.getPosition().y);
 			}
 		}
 		if (maze.location.hasDoor(Room.SOUTH) && !maze.location.getDoor(Room.SOUTH).isLocked()) {
-			if (maze.player.bounds.overlaps(maze.location.getDoor(Room.SOUTH).bounds)) {
+			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.SOUTH).getBounds())) {
 				maze.locationY--;
 				maze.location = maze.map[maze.locationX][maze.locationY];
-				maze.player.position.y = maze.location.getWall(Room.NORTH).bounds.y - maze.player.bounds.height;
+				maze.player.setPosition(maze.player.getPosition().x, maze.location.getWall(Room.NORTH).getBounds().y - maze.player.getBounds().height);
 			}
 		}
 		if (maze.location.hasDoor(Room.WEST) && !maze.location.getDoor(Room.WEST).isLocked()) {
-			if (maze.player.bounds.overlaps(maze.location.getDoor(Room.WEST).bounds)) {
+			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.WEST).getBounds())) {
 				maze.locationX--;
 				maze.location = maze.map[maze.locationX][maze.locationY];
-				maze.player.position.x = maze.location.getWall(Room.EAST).bounds.x - maze.player.bounds.width;
+				maze.player.setPosition(maze.location.getWall(Room.EAST).getBounds().x - maze.player.getBounds().width, maze.player.getPosition().y);
 			}
 		}
 		
 		//Wall collisions
-		if (maze.player.bounds.overlaps(maze.location.getWall(Room.NORTH).bounds)) {
-			maze.player.position.y = maze.location.getWall(Room.NORTH).bounds.y - maze.player.bounds.height;
+		if (maze.player.getBounds().overlaps(maze.location.getWall(Room.NORTH).getBounds())) {
+			maze.player.setPosition(maze.player.getPosition().x, maze.location.getWall(Room.NORTH).getBounds().y - maze.player.getBounds().height);
 		}
-		if (maze.player.bounds.overlaps(maze.location.getWall(Room.EAST).bounds)) {
-			maze.player.position.x = maze.location.getWall(Room.EAST).bounds.x - maze.player.bounds.width;
+		if (maze.player.getBounds().overlaps(maze.location.getWall(Room.EAST).getBounds())) {
+			maze.player.setPosition(maze.location.getWall(Room.EAST).getBounds().x - maze.player.getBounds().width, maze.player.getPosition().y);
 		}
-		if (maze.player.bounds.overlaps(maze.location.getWall(Room.SOUTH).bounds)) {
-			maze.player.position.y = maze.location.getWall(Room.SOUTH).bounds.height;
+		if (maze.player.getBounds().overlaps(maze.location.getWall(Room.SOUTH).getBounds())) {
+			maze.player.setPosition(maze.player.getPosition().x, maze.location.getWall(Room.SOUTH).getBounds().height);
 		}
-		if (maze.player.bounds.overlaps(maze.location.getWall(Room.WEST).bounds)) {
-			maze.player.position.x = maze.location.getWall(Room.WEST).bounds.width;
+		if (maze.player.getBounds().overlaps(maze.location.getWall(Room.WEST).getBounds())) {
+			maze.player.setPosition(maze.location.getWall(Room.WEST).getBounds().width, maze.player.getPosition().y);
 		}
 		
 		

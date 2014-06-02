@@ -45,8 +45,6 @@ public class Room extends GameObject {
 	
 	@Override
 	public void update(float delta) {
-		super.update(delta);
-		
 		for (int i = 0; i < walls.length; i++) {
 			walls[i].update(delta);
 		}
@@ -61,7 +59,7 @@ public class Room extends GameObject {
 	@Override
 	public void draw(ShapeRenderer renderer) {
 		renderer.setColor(roomColor);
-		renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+		renderer.rect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
 		
 		for (int i = 0; i < walls.length; i++) {
 			walls[i].draw(renderer);

@@ -14,11 +14,11 @@ public class Wall extends GameObject {
 		
 		switch (direction) {
 		case Room.NORTH:
-			position.y = Gdx.graphics.getHeight() - bounds.height;
+			setPosition(0, Gdx.graphics.getHeight() - getBounds().height);
 			break;
 		case Room.EAST:
 			rotate();
-			position.x = Gdx.graphics.getWidth() - bounds.width;
+			setPosition(Gdx.graphics.getWidth() - getBounds().width, 0);
 			break;
 		case Room.SOUTH:
 			break;
@@ -34,6 +34,12 @@ public class Wall extends GameObject {
 	@Override
 	public void draw(ShapeRenderer renderer) {
 		renderer.setColor(Color.LIGHT_GRAY);
-		renderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
+		renderer.rect(getBounds().x, getBounds().y, getBounds().width, getBounds().height);
+	}
+
+	@Override
+	public void update(float delta) {
+		// TODO Auto-generated method stub
+		
 	}
 }
