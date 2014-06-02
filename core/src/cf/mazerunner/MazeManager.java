@@ -31,12 +31,15 @@ public class MazeManager {
 				if (map[i][j].hasDoor(Room.NORTH)) {
 					map[i][j].getDoor(Room.NORTH).setUnlocked(j < map[i].length -1 && map[i][j+1].hasDoor(Room.SOUTH));
 				}
+				//Check EAST door
 				if (map[i][j].hasDoor(Room.EAST)) {
 					map[i][j].getDoor(Room.EAST).setUnlocked(i < map.length -1 && map[i+1][j].hasDoor(Room.WEST));
 				}
+				//Check SOUTH door
 				if (map[i][j].hasDoor(Room.SOUTH)) {
 					map[i][j].getDoor(Room.SOUTH).setUnlocked(j > 0 && map[i][j-1].hasDoor(Room.NORTH));
 				}
+				//Check WEST door
 				if (map[i][j].hasDoor(Room.WEST)) {
 					map[i][j].getDoor(Room.WEST).setUnlocked(i > 0 && map[i-1][j].hasDoor(Room.EAST));
 				}
