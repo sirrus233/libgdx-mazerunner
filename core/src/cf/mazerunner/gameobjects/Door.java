@@ -36,18 +36,18 @@ public class Door extends GameObject {
 		locked = false;
 	}
 	
-	public boolean isLocked() {
+	public boolean getLocked() {
 		return locked;
 	}
 	
-	public void unlock() {
-		locked = false;
+	public void setLocked(boolean l) {
+		locked = l;
 	}
 	
-	public void lock() {
-		locked = true;
+	public void setUnlocked(boolean u) {
+		setLocked(!u);
 	}
-
+	
 	@Override
 	public void draw(ShapeRenderer renderer) {
 		if (locked) {

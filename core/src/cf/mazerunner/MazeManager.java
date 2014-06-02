@@ -24,6 +24,26 @@ public class MazeManager {
 		location = map[locationX][locationY];
 	}
 	
+	public void updateDoors() {
+		for (int i = 0; i < map.length; i++) {
+			for (int j = 0; j < map[i].length; j++) {
+				//Check NORTH door
+				if (map[i][j].hasDoor(Room.NORTH)) {
+					map[i][j].getDoor(Room.NORTH).setUnlocked(j < map[i].length -1 && map[i][j+1].hasDoor(Room.SOUTH));
+				}
+				if (map[i][j].hasDoor(Room.EAST)) {
+					map[i][j].getDoor(Room.EAST).setUnlocked(i < map.length -1 && map[i+1][j].hasDoor(Room.WEST));
+				}
+				if (map[i][j].hasDoor(Room.SOUTH)) {
+					map[i][j].getDoor(Room.SOUTH).setUnlocked(j > 0 && map[i][j-1].hasDoor(Room.NORTH));
+				}
+				if (map[i][j].hasDoor(Room.WEST)) {
+					map[i][j].getDoor(Room.WEST).setUnlocked(i > 0 && map[i-1][j].hasDoor(Room.EAST));
+				}
+			}
+		}
+	}
+	
 	private void buildMaze() {
 		
 		map[0][0] = new Room(Color.BLACK);

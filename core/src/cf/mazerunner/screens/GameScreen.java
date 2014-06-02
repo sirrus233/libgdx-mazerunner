@@ -23,29 +23,31 @@ public class GameScreen extends AbstractScreen {
 		maze.location.update(delta);
 		maze.player.update(delta);
 		
+		maze.updateDoors();
+		
 		//Door collisions
-		if (maze.location.hasDoor(Room.NORTH) && !maze.location.getDoor(Room.NORTH).isLocked()) {
+		if (maze.location.hasDoor(Room.NORTH) && !maze.location.getDoor(Room.NORTH).getLocked()) {
 			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.NORTH).getBounds())) {
 				maze.locationY++;
 				maze.location = maze.map[maze.locationX][maze.locationY];
 				maze.player.setPosition(maze.player.getPosition().x, maze.location.getWall(Room.SOUTH).getBounds().height);
 			}
 		}
-		if (maze.location.hasDoor(Room.EAST) && !maze.location.getDoor(Room.EAST).isLocked()) {
+		if (maze.location.hasDoor(Room.EAST) && !maze.location.getDoor(Room.EAST).getLocked()) {
 			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.EAST).getBounds())) {
 				maze.locationX++;
 				maze.location = maze.map[maze.locationX][maze.locationY];
 				maze.player.setPosition(maze.location.getWall(Room.WEST).getBounds().width, maze.player.getPosition().y);
 			}
 		}
-		if (maze.location.hasDoor(Room.SOUTH) && !maze.location.getDoor(Room.SOUTH).isLocked()) {
+		if (maze.location.hasDoor(Room.SOUTH) && !maze.location.getDoor(Room.SOUTH).getLocked()) {
 			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.SOUTH).getBounds())) {
 				maze.locationY--;
 				maze.location = maze.map[maze.locationX][maze.locationY];
 				maze.player.setPosition(maze.player.getPosition().x, maze.location.getWall(Room.NORTH).getBounds().y - maze.player.getBounds().height);
 			}
 		}
-		if (maze.location.hasDoor(Room.WEST) && !maze.location.getDoor(Room.WEST).isLocked()) {
+		if (maze.location.hasDoor(Room.WEST) && !maze.location.getDoor(Room.WEST).getLocked()) {
 			if (maze.player.getBounds().overlaps(maze.location.getDoor(Room.WEST).getBounds())) {
 				maze.locationX--;
 				maze.location = maze.map[maze.locationX][maze.locationY];
