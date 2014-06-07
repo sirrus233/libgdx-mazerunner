@@ -6,7 +6,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
 public class Mazerunner extends Game {	
-	public GameScreen gameScreen;
+	private GameScreen gameScreen;
 	
 	@Override
 	public void create() {
